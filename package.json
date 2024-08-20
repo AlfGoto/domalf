@@ -1,6 +1,6 @@
 {
   "name": "domalf",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "simplify dom manipulation",
   "main": "index.js",
   "type": "module",

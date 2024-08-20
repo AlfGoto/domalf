@@ -6,7 +6,7 @@ domAlf est une fonction JavaScript qui permet d'ajouter dynamiquement une chaîn
 ### Importation
 
 ```javascript
-import domAlf from './chemin/vers/le/fichier';
+import domAlf from 'domalf';
 ```
 
 ### Syntaxe
