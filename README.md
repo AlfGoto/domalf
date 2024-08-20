@@ -1,57 +1,55 @@
 # domAlf
-domAlf est une fonction JavaScript qui permet d'ajouter dynamiquement une chaîne de caractères HTML à un élément parent spécifié dans le DOM. La fonction retourne un objet contenant toutes les références des éléments enfants qui ont un attribut id.
+Une petite bibliothèque JavaScript pour manipuler le DOM facilement en utilisant des chaînes de caractères HTML et pour créer et ajouter des éléments HTML dynamiquement.
 
-## Utilisation
+## Installation
 
-### Importation
-
-```javascript
-import domAlf from 'domalf';
+```
+npm install domAlf
 ```
 
-### Syntaxe
+## Utilisation 
 
-```javascript
-domAlf(string, parent = document.body)
+```
+import { domAlf, creAppend } from 'domAlf';
 ```
 
-### Arguments
+### Fonction domAlf(string, parent = document.body)
 
-**string** (obligatoire) : Une chaîne de caractères représentant un élément HTML valide. L'élément doit être une balise HTML complète et correctement formée.
+Cette fonction permet d'ajouter un élément HTML au DOM à partir d'une chaîne de caractères HTML. Elle retourne un objet contenant les éléments ajoutés qui ont un id.
 
-**parent** (optionnel) : L'élément DOM dans lequel la chaîne HTML sera insérée. Par défaut, l'élément parent est document.body.
+#### Paramètres
 
-### Valeur de retour
+* **string (String)** : La chaîne de caractères HTML à ajouter au DOM. Cette chaîne doit commencer par une balise HTML valide et se terminer par **>**.
+* **parent (Element)** : L'élément parent dans lequel l'élément HTML sera ajouté. Par défaut, c'est **document.body**.
+#### Retour
 
-La fonction retourne un objet contenant les éléments enfants de parent ayant un attribut id. Chaque clé de l'objet correspond à l'ID de l'élément, et la valeur associée est une référence à l'élément DOM.
+Un objet contenant tous les éléments ajoutés qui ont un **id**. La clé de chaque entrée est l'**id** de l'élément, et la valeur est l'élément DOM lui-même.
 
 ### Exemple
 
-```javascript
-import domAlf from './domAlf';
-
-const htmlString = '<div id="myDiv"><p id="myParagraph">Hello, World!</p></div>';
-const elements = domAlf(htmlString);
-
-console.log(elements);
-// {
-// myDiv: <div id="myDiv">...</div>,
-// myParagraph: <p id="myParagraph">Hello, World!</p>
-// }
+```
+const elements = domAlf('<div id="container"><p id="text">Hello World!</p></div>');
+console.log(elements.container); // <div id="container">...</div>
+console.log(elements.text); // <p id="text">Hello World!</p>
 ```
 
-### Gestion des erreurs
+### Fonction creAppend(pere, child, content = null)
 
-Si la chaîne passée en argument n'est pas une balise HTML valide, la fonction affichera un message d'erreur dans la console
+Cette fonction crée un nouvel élément HTML et l'ajoute en tant qu'enfant à un élément parent spécifié.
 
-```javascript
-console.error('argument is not a valid html tag: ', string);
+#### Paramètres
+
+* **pere (Element)** : L'élément parent auquel le nouvel élément sera ajouté.
+* **child (String)** : Le type de l'élément enfant à créer (ex. **div**, **span**).
+* **content (String)** : Le contenu HTML à insérer dans l'élément enfant (optionnel).
+#### Retour
+
+L'élément enfant nouvellement créé.
+
+### Exemple 
+
 ```
-
-## Notes
-
-La chaîne HTML fournie doit être correctement formée, avec une balise ouvrante et une balise fermante (ou une balise auto-fermante).
-Si la chaîne n'est pas valide, la fonction ne modifiera pas le DOM.
-## License
-
-Ce projet est sous licence MIT.
+const parent = document.getElementById('container');
+const child = creAppend(parent, 'p', 'Hello World!');
+console.log(child); // <p>Hello World!</p>
+```
